@@ -43,7 +43,9 @@ outl.grubbs<-function(x, plotit=T, thresh = 0.01){
 
 # -- Read in the counts data
 ###########
-counts<-read.delim(paste0(args$directory, args$filecounts), header=T)
+cat("reading in counts dataset with ...")
+counts<-read.delim(paste0(args$directory,"/",args$counts), header=T)
+cat(nrow(counts),"genes and", ncol(counts), "libraries\n")
 counts<-data.matrix(counts)
 
 ###########
@@ -52,6 +54,7 @@ counts<-data.matrix(counts)
 ###########
 ol<-outl.grubbs(colSums(counts), thresh = args$l)
 todrop<-which(is.na(ol))
+cat("dropping libs:", paste(colnames(counts)[todrop], collapse = ", "),"\n")
 counts<-counts[,-todrop]
 ###########
 
@@ -72,5 +75,6 @@ cpmThresh <- slope*args$t
 # -- Drop genes with mean cpm < threshold and write files
 ###########
 counts<-counts[geneCountsPM>=cpmThresh,]
+cat("retaining", nrow(counts),"genes and",ncol(counts),"libraries\n")
 write.table(counts, file = paste0(args$directory, "processed.counts"), sep = "\t")
 ###########
