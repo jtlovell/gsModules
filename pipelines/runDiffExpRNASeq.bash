@@ -10,7 +10,8 @@
   --threshold 5
 
 # sm 3c match counts and info data
-./matchCountsInfo.R --directory /Users/John/Desktop/gsModules/data/rnaseq_counts
+./matchCountsInfo.R \
+  --directory /Users/John/Desktop/gsModules/data/rnaseq_counts
 
 # sm 3d run differential expression
 ## for a matched counts and info dataset, parse so that only factors desired are retained
@@ -24,7 +25,7 @@
   --factors2keep HAL2,FIL2
 
   # sm 3e calculate voom-normalized data
-  ## same arguments as above, but without formula (since normalization occurs agnostic of experimental design)
+  ## same arguments as above, but without formulae (since normalization is agnostic to exp. design)
 ./calcVoom.R \
   --directory  /Users/John/Desktop/gsModules/data/rnaseq_counts \
   --subsetColumn id \
