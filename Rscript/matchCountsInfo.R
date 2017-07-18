@@ -22,7 +22,7 @@ idcol<-args$idcolumn
 # -- Read in the counts data
 ###########
 counts<-read.delim(paste0(args$directory, args$counts), header=T)
-info<-read.csv(paste0(args$directory, args$lib_data), header=T, stringsAsFactors = F)
+info<-read.csv(paste0(args$directory, "/",args$lib_data), header=T, stringsAsFactors = F)
 
 # -- Find the matching columns in the library data with
 if(idcol %in% colnames(info) & sum(info[,idcol] %in% colnames(counts))>1){
@@ -36,6 +36,6 @@ if(idcol %in% colnames(info) & sum(info[,idcol] %in% colnames(counts))>1){
 rownames(info)<-info$library
 count.out<-counts[,ids]
 info<-info[ids,]
-write.csv(info, file = "lib_info.csv")
-write.table(count.out, file = paste0(args$directory, "processed.counts"), sep = "\t")
+write.csv(info, file = paste0(args$directory, "/lib_info.csv"), row.names = F)
+write.table(count.out, file = paste0(args$directory, "/processed.counts"), sep = "\t")
 ###########

@@ -30,8 +30,8 @@ suppressPackageStartupMessages(library("limma"))
 suppressPackageStartupMessages(library("edgeR"))
 # -- Read in the counts data
 ###########
-counts<-read.delim(paste0(args$directory, args$counts), header=T)
-info<-read.csv(paste0(args$directory, args$lib_info), header=T, stringsAsFactors = F)
+counts<-read.delim(paste0(args$directory, "/",args$counts), header=T)
+info<-read.csv(paste0(args$directory, "/",args$lib_info), header=T, stringsAsFactors = F)
 if(!identical(info$library, colnames(counts)))
   stop("library and counts data do not match - run matchCountsInfo.R first\n")
 ###########
